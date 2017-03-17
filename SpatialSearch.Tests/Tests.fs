@@ -21,3 +21,19 @@ module LibraryTests =
         let actualOrder = inOrder(value1, value2)
         Assert.Equal(expectedOrder, actualOrder)
     
+
+    [<Fact>]
+    let ``toBox creates box correctly out of 2 locations``() =
+        let location1 = location(4,5,6)
+        let location2 = location(1,2,3)
+        let expected = 
+            {
+                minX = 1
+                minY = 2
+                minZ = 3
+                maxX = 4
+                maxY = 5
+                maxZ = 6
+            }
+        let actual = toBox location1 location2
+        Assert.Equal(expected, actual)
