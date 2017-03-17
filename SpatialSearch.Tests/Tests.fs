@@ -37,3 +37,18 @@ module LibraryTests =
             }
         let actual = toBox location1 location2
         Assert.Equal(expected, actual)
+    
+    [<Theory>]
+    [<InlineData(1,1,1)>]
+    [<InlineData(4,4,4)>]
+    [<InlineData(4,1,1)>]
+    [<InlineData(4,1,4)>]
+    [<InlineData(2,1,2)>]
+    [<InlineData(2,2,1)>]
+    let ``bounding box does not enclose point outside it`` (x,y,z) =
+        let boundingBox =  (location(2,2,2), location(3,3,3)) ||> toBox
+        let location = location(x,y,z)
+        Assert.False(boundingBox |> encloses location)
+        
+
+
