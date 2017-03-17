@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "SpatialSearch", "SpatialSearch\SpatialSearch.fsproj", "{09045850-6C4E-4355-ABFA-1E3717B2FB5D}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "SpatialSearch.Tests", "SpatialSearch.Tests\SpatialSearch.Tests.fsproj", "{6480FC3E-92CD-4795-838C-07411C9B1E4D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{922778F4-D414-4C7A-A6AA-490E8B8396E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,10 @@ Global
 		{09045850-6C4E-4355-ABFA-1E3717B2FB5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09045850-6C4E-4355-ABFA-1E3717B2FB5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09045850-6C4E-4355-ABFA-1E3717B2FB5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6480FC3E-92CD-4795-838C-07411C9B1E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6480FC3E-92CD-4795-838C-07411C9B1E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6480FC3E-92CD-4795-838C-07411C9B1E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6480FC3E-92CD-4795-838C-07411C9B1E4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
