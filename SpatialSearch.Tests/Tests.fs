@@ -50,5 +50,24 @@ module LibraryTests =
         let location = location(x,y,z)
         Assert.False(boundingBox |> encloses location)
         
+    [<Theory>]
+    [<InlineData(3,2,3)>]
+    [<InlineData(2,3,3)>]
+    [<InlineData(3,3,3)>]
+    [<InlineData(3,3,2)>]
+    [<InlineData(2,3,2)>]
+    [<InlineData(2,2,2)>]
+    let ``bounding box encloses point on its edge`` (x,y,z) =
+        let boundingBox =  (location(2,2,2), location(3,3,3)) ||> toBox
+        let location = location(x,y,z)
+        Assert.True(boundingBox |> encloses location)
+    
+    [<Theory>]
+    [<InlineData(2.5,2.5,2.5)>]
+    let ``bounding box encloses point inside it`` (x,y,z) =
+        let boundingBox =  (location(2.,2.,2.), location(3.,3.,3.)) ||> toBox
+        let location = location(x,y,z)
+        Assert.True(boundingBox |> encloses location)
+    
 
 

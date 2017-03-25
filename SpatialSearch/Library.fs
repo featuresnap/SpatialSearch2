@@ -1,6 +1,8 @@
 ﻿namespace SpatialSearch
 
 module Library = 
+    
+    [<Struct>]
     type BoundingBox<'a> = 
         { minX : 'a
           minY : 'a
@@ -9,6 +11,7 @@ module Library =
           maxY : 'a
           maxZ : 'a }
     
+    [<Struct>]
     type Location<'a> = 
         { X : 'a
           Y : 'a
@@ -34,11 +37,19 @@ module Library =
           maxY = y2
           minZ = z1
           maxZ = z2 }
-    
-    type Node<'a> = 
-        | Leaf of Location<'a>
-        | Parent of BoundingBox<'a> * Node<'a> list
-    
+
     let inline encloses location box = 
-        location.X >= box.minX && location.X <= box.maxX && location.Y >= box.minY && location.Y <= box.maxY 
-        && location.Z >= box.minZ && location.Z <= box.maxZ
+        location.X >= box.minX && 
+        location.X <= box.maxX && 
+        location.Y >= box.minY && 
+        location.Y <= box.maxY && 
+        location.Z >= box.minZ && 
+        location.Z <= box.maxZ
+    
+    type Tree<'a> = 
+        |Empty
+        |NonEmptyTree of Root:Node<'a>
+    and Node<'a> = 
+        | PointNode of Location<'a>
+        | ContainerNode of Location<'a> list
+            
