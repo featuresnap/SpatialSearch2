@@ -45,11 +45,39 @@ module Library =
         location.Y <= box.maxY && 
         location.Z >= box.minZ && 
         location.Z <= box.maxZ
+           
+    type Pt = float
     
-    type Tree<'a> = 
-        |Empty
-        |NonEmptyTree of Root:Node<'a>
-    and Node<'a> = 
-        | PointNode of Location<'a>
-        | ContainerNode of Location<'a> list
+    type Position = 
+        |MinusInfinity
+        |Value of Pt
+        |PlusInfinity
+ 
+    type Bounds = (Position * Position) * (Position * Position)
+
+    type QuadNode = 
+        |Leaf of Bounds
+        |Node of  (Pt * Pt) * Bounds * Children
+    and Children = {
+            NE: QuadNode
+            NW: QuadNode
+            SE: QuadNode
+            SW: QuadNode }
+     
+    let empty () : Bounds = 
+        let min = (MinusInfinity, MinusInfinity)
+        let max = (PlusInfinity, PlusInfinity)
+        (min, max) 
+
+    let addLocation (location: Pt * Pt) (node:QuadNode) = 
+        let locX, locY = location
+        match node with 
+        |Leaf (bounds:Bounds) ->
+            let minBound, maxBound = bounds
+            let children = {
+               NE=Leaf((Value locX, Value locY), (fst maxBound, snd maxBound))
+               SE=Leaf((Value locX, Value locY), (fst maxBound, snd minBound))
+               NW=Leaf((fst minBound, snd maxBound), (Value locX, Value locY))
+               SW=Leaf((fst minBound, snd minBound), (Value locX, Value locY)) }
+            Node (location, bounds, children)
             
