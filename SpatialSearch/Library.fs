@@ -47,13 +47,9 @@ module Library =
         location.Z <= box.maxZ
            
     type Pt = float
-    
-    type Position = 
-        |MinusInfinity
-        |Value of Pt
-        |PlusInfinity
- 
-    type Bounds = (Position * Position) * (Position * Position)
+    type Location = Pt * Pt
+            
+    type Bounds = (Location) * (Location)
 
     type QuadNode = 
         |Leaf of Bounds
@@ -65,9 +61,17 @@ module Library =
             SW: QuadNode }
      
     let empty () : Bounds = 
-        let min = (MinusInfinity, MinusInfinity)
-        let max = (PlusInfinity, PlusInfinity)
+        let min = (Pt.MinValue, Pt.MinValue)
+        let max = (Pt.MaxValue, Pt.MaxValue)
         (min, max) 
+
+    let inline encloses location (minBound, maxBound) =
+        location >= minBound &&
+        location < maxBound
+
+    let findEnclosingChild location children = 
+        match location with 
+        |
 
     let addLocation (location: Pt * Pt) (node:QuadNode) = 
         let locX, locY = location
@@ -80,4 +84,5 @@ module Library =
                NW=Leaf((fst minBound, snd maxBound), (Value locX, Value locY))
                SW=Leaf((fst minBound, snd minBound), (Value locX, Value locY)) }
             Node (location, bounds, children)
-            
+        |Node (origin, bounds, children) ->
+            let enclosingChild = children |> findEnclosingChild location
